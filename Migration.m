@@ -34,7 +34,7 @@ for ik=1:3
          [arymig_rms,tmig_rms_tot,xmig_rms_tot]=kirk(file_data.seis,vrms,file_data.t,file_data.x,params);
          elapsedTime(j) = toc;
          plotimage(arymig_rms,file_data.t,file_data.x);   
-%        saveas(gcf,(['kirchoff_' num2str(params(1)) '.png']));  
+         saveas(gcf,(['kirchoff_' num2str(params(1)) '.png']));  
 % %         Elapsed time is 10.057669 seconds.
 % %         Elapsed time is 5.830910 seconds.
 % %         Elapsed time is 5.830910 seconds.     
@@ -50,25 +50,25 @@ for ik=1:3
              saveas(gcf,(['fd_' num2str(dtau(i)) '.png']));             
          end
 
-%         %% Gazdag
-%         params_gaz=params(1:4);
-%         params_gaz(3)=200;
-%         ratio=1;      
-%         for kj=1:2
-%             params_gaz(4)=90/ratio;
-%             [out,cputime]=ps_migt(file_data.seis,file_data.t,file_data.x,vrms,params_gaz);
-%             plotimage(out,file_data.t,file_data.x);
-%             saveas(gcf,(['gazdag_nopad_' num2str(params_gaz(4)) '.png']));
-%             ratio=ratio*6;
-%         end
-%         %% en limitant � 15 deg (gasdag.png) les reflecteurs profonds (probablement � fort ...
-%         %% pendage) sont tronqu�s.        
-%         clf
-%         params_gaz=params(1:4);
-%         params_gaz(4)=90;
-%         params_gaz(2)=60;
-%         params_gaz(3)=200;
-% 
+         %% Gazdag
+         params_gaz=params(1:4);
+         params_gaz(3)=200;
+         ratio=1;      
+         for kj=1:2
+             params_gaz(4)=90/ratio;
+             [out,cputime]=ps_migt(file_data.seis,file_data.t,file_data.x,vrms,params_gaz);
+             plotimage(out,file_data.t,file_data.x);
+             saveas(gcf,(['gazdag_nopad_' num2str(params_gaz(4)) '.png']));
+             ratio=ratio*6;
+         end
+         %% en limitant � 15 deg (gasdag.png) les reflecteurs profonds (probablement � fort ...
+         %% pendage) sont tronqu�s.        
+         clf
+         params_gaz=params(1:4);
+         params_gaz(4)=90;
+         params_gaz(2)=60;
+         params_gaz(3)=200;
+ 
          for ij=1:2
              if ij==2
                      params_gaz(1)=0.1;
@@ -80,25 +80,25 @@ for ik=1:3
          %% Pas de diff�rence observable entre la 0 et 0.1 tpad, mais changement de phase de l'ondelette
          %% d'une forme antisymm�trique � une forme sym�trique
         
-%           %% Stolt migation
-%           params_fk=[ params params params(1:3) ];
-%           [seismig,tmig,xmig]=fkmig(file_data.seis,file_data.t,file_data.x,v_mig,params_fk);
-%           plotimage(seismig,file_data.t,file_data.x);
-%           saveas(gcf,'Stolt.png');
-% 
-%             %% En prof ni stolt ni gazdag ne retrouvent les reflecteurs, gazdag marche mieux en surface,
-%             %% stolt semble de moindre qualit� en gle.
+           %% Stolt migation
+           params_fk=[ params params params(1:3) ];
+           [seismig,tmig,xmig]=fkmig(file_data.seis,file_data.t,file_data.x,v_mig,params_fk);
+           plotimage(seismig,file_data.t,file_data.x);
+           saveas(gcf,'Stolt.png');
+ 
+             %% En prof ni stolt ni gazdag ne retrouvent les reflecteurs, gazdag marche mieux en surface,
+             %% stolt semble de moindre qualit� en gle.
 
   else if ik==2  
-%     str_file=(['data' num2str(ik) '.mat']);
-%     file_data=load(str_file);    
-%     
-%     %%Vrms calculation
-%     nt=size(file_data.seis,1);
-%     t1=file_data.tv(1);t2=file_data.tv(end);
-%     tout=linspace(t1,t2,nt);
-%     vrms=vint2vrms(file_data.v,file_data.tv,tout);
-%     
+     str_file=(['data' num2str(ik) '.mat']);
+     file_data=load(str_file);    
+     
+     %%Vrms calculation
+     nt=size(file_data.seis,1);
+     t1=file_data.tv(1);t2=file_data.tv(end);
+     tout=linspace(t1,t2,nt);
+     vrms=vint2vrms(file_data.v,file_data.tv,tout);
+     
 %         %% PS
          params_gaz=params(1:4);
          params_gaz(4)=90;
